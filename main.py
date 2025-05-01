@@ -1,37 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import os
-import time
 from colorama import Fore, Back, Style, init
 from model.game import Game
+from util.terminal import clear_screen, print_header, print_section
 
-def clear_screen():
-    """
-    Limpa a tela do terminal para melhorar a experiência visual.
-    """
-    # Verifica o sistema operacional para usar o comando correto
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-def print_header():
-    """
-    Imprime o cabeçalho do jogo com estilo.
-    """
-    print(Fore.YELLOW + Style.BRIGHT)
-    print("*" * 70)
-    print("*" + " " * 68 + "*")
-    print("*" + " " * 24 + "TICKET TO RIDE" + " " * 25 + "*")
-    print("*" + " " * 68 + "*")
-    print("*" * 70)
-    print(Style.RESET_ALL)
-
-def print_section(title):
-    """
-    Imprime um separador de seção com título.
-    
-    Args:
-        title (str): Título da seção a ser exibido
-    """
-    print("\n" + Fore.CYAN + "=" * 20 + f" {title} " + "=" * 20 + Style.RESET_ALL + "\n")
 
 def play_ttr():
     """

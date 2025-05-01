@@ -1,0 +1,8 @@
+Vancouver,Seattle,1,grey
+Vancouver,Calgary,3,grey
+Calgary,Seattle,4,grey
+Calgary,Helena,4,grey
+Portland,Seattle,1,grey
+Portland,Los Angeles,3,green
+Los Angeles,Helena,2,red
+Helena,Seattle,5,yellow

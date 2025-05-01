@@ -1,6 +1,5 @@
 import networkx as nx
 from typing import List, Tuple, Set
-import matplotlib.pyplot as plt
 
 class Board:
     def __init__(self):

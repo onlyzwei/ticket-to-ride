@@ -13,8 +13,8 @@ class Player(object):
         # Usa Counter para representar a mão e permitir remoções eficientes
         self.hand = collections.Counter(starting_hand)
 
-        # Inicializa os tickets, marcando como não completados
-        self.tickets = {} if starting_tickets is None else {x: False for x in starting_tickets}
+        # Inicializa os tickets como uma lista (sem marcar como completos ou incompletos)
+        self.tickets = [] if starting_tickets is None else list(starting_tickets)
 
         self.num_trains = num_trains
         self.points = 0
@@ -33,12 +33,7 @@ class Player(object):
 
     # Adiciona um ticket à lista de tickets do jogador
     def add_ticket(self, ticket):
-        self.tickets[ticket] = False
-
-    # Marca um ticket como completo
-    def complete_ticket(self, ticket):
-        assert ticket in self.tickets
-        self.tickets[ticket] = True
+        self.tickets.append(ticket)
 
     # Retorna a mão atual do jogador
     def get_hand(self):

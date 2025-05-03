@@ -21,9 +21,8 @@ class Ticket:
             self._print_sep_line(player.get_tickets())
             print(f"{Fore.YELLOW}Todos os seus tickets: {Style.RESET_ALL}")
             self._print_sep_line(player.get_tickets())
-            return
 
-        # Distribui os tickets e cria um dicionário para indexá-los
+        # Distribui os tickets e cria uma lista para indexá-los
         dealt_tickets = self.deck.deal_tickets(tickets_to_deal)
         indexed_tickets = {}
 
@@ -37,13 +36,13 @@ class Ticket:
         # Coleta as escolhas do jogador
         selected_tickets = set()  # Usar set para evitar duplicatas
         while len(selected_tickets) < tickets_to_deal:
-            user_input = input("Digite o número do ticket ou 'done' para finalizar: ")
+            user_input = input("Digite o número do ticket, 'done' para finalizar: ")
 
-            if user_input == 'done':
+            if user_input.lower() == 'done':
                 if len(selected_tickets) >= min_num_to_select:
                     break
                 else:
-                    print(f"Deve selecionar pelo menos {min_num_to_select} ticket(s)")
+                    print(f"{Fore.RED}Você deve selecionar pelo menos {min_num_to_select} ticket(s).{Style.RESET_ALL}")
                     continue
 
             try:
@@ -52,11 +51,11 @@ class Ticket:
                     if indexed_tickets[ticket_index] not in selected_tickets:
                         selected_tickets.add(indexed_tickets[ticket_index])
                     else:
-                        print("Este ticket já foi selecionado. Escolha outro.")
+                        print(f"{Fore.RED}Este ticket já foi selecionado. Escolha outro.{Style.RESET_ALL}")
                 else:
-                    print("Número de ticket inválido. Tente novamente.")
+                    print(f"{Fore.RED}Número de ticket inválido. Tente novamente.{Style.RESET_ALL}")
             except ValueError:
-                print("Entrada inválida. Digite um número ou 'done'.")
+                print(f"{Fore.RED}Entrada inválida. Digite um número ou 'done' para finalizar.{Style.RESET_ALL}")
 
         # Processa os tickets
         for ticket_index, ticket in indexed_tickets.items():
@@ -72,13 +71,13 @@ class Ticket:
         print(f"Tickets na pilha de descarte: {len(self.deck.ticket_discard_pile)}")
         print(f"{Fore.YELLOW}Todos os seus tickets:{Style.RESET_ALL}")
         self._print_sep_line(player.get_tickets())
-    
+
     def score_player_tickets(self, player):
         """Calcula a pontuação dos tickets completados por um jogador"""
         print(Fore.GREEN + f"\nPontuando tickets para {player.name}:" + Style.RESET_ALL)
-        for ticket in player.tickets:
-            city1 = ticket[0]
-            city2 = ticket[1]
+        for ticket in player.get_tickets():
+            city1 = ticket[0]  
+            city2 = ticket[1] 
             value = ticket[2]
             pos_nodes = player.player_board.get_nodes()
             if city1 not in pos_nodes or city2 not in pos_nodes:

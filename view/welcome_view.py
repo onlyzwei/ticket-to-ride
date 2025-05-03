@@ -5,15 +5,17 @@ def show_welcome_message():
     Exibe a mensagem de boas-vindas e solicita o número de jogadores.
     """
     print(Fore.GREEN + "\nBem-vindo ao Ticket to Ride!\n" + Style.RESET_ALL)
-    num_players = input(Fore.WHITE + "Quantos jogadores participarão hoje? (1-6): " + Style.RESET_ALL)
-    count = 0
-    while not num_players.isdigit() or int(num_players) not in range(1, 7) and count < 5:
-        if num_players.lower() == 'exit': 
+
+    while True:
+        entrada = input(Fore.WHITE + "Número de jogadores (1-6) ou 'exit' para sair: " + Style.RESET_ALL)
+        if entrada.lower() == 'exit':
             print(Fore.GREEN + "Obrigado por jogar!" + Style.RESET_ALL)
             return None
-        num_players = input(Fore.RED + "Por favor, digite um número entre 1 e 6: " + Style.RESET_ALL)
-        count += 1
-    if count >= 5:
-        print(Fore.YELLOW + "O número padrão de jogadores foi definido como 2." + Style.RESET_ALL)
-        return 2
-    return int(num_players)
+        try:
+            num_players = int(entrada)
+            if 1 <= num_players <= 6:
+                return num_players
+            else:
+                print(Fore.RED + "Por favor, digite um número entre 1 e 6." + Style.RESET_ALL)
+        except ValueError:
+            print(Fore.RED + "Entrada inválida. Digite um número inteiro ou 'exit' para sair." + Style.RESET_ALL)

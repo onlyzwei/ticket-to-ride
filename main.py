@@ -34,9 +34,7 @@ def play_ttr():
         clear_screen()
         current_player = game.get_current_player()
         result = play_turn(current_player, game)
-        if result == "voltar":
-            continue  # Volta para o início do loop principal
-        
+                
         if game.check_ending_condition(current_player):
             break
         game.advance_one_player()

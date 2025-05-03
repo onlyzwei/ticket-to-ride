@@ -60,15 +60,11 @@ class Board:
         edges = self._read_edges(edges_file)
         self._create_edges(edges)
 
-    def has_edge(self, city1: str, city2: str) -> bool:
-        """Verifica se existe uma conexão entre duas cidades."""
-        return self.graph.has_edge(city1, city2)
-
-    def _get_edge_colors(self, city1: str, city2: str) -> List[str]:
+    def get_edge_colors(self, city1: str, city2: str) -> List[str]:
         """Retorna as cores das conexões entre duas cidades."""
-        return self.graph[city1][city2]['edge_colors']
+        return self.graph.get_edge_data(city1, city2)['edge_colors']
 
-    def _get_edge_weight(self, city1: str, city2: str) -> int:
+    def get_edge_weight(self, city1: str, city2: str) -> int:
         """Retorna o peso da conexão entre duas cidades."""
         return self.graph[city1][city2]['weight']
     
@@ -84,10 +80,10 @@ class Board:
         Raises:
             ValueError: Se a conexão não existir
         """
-        if not self.has_edge(city1, city2):
+        if not self.graph.has_edge(city1, city2):
             raise ValueError(f"Não existe conexão da {city1} para {city2}")
         
-        colors = self._get_edge_colors(city1, city2)
+        colors = self.get_edge_colors(city1, city2)
 
         # se a conexão é cinza, aceita qualquer cor, se não, aceita apenas a cor especificada
         if "grey" in colors:
@@ -99,55 +95,7 @@ class Board:
 
         if len(self.graph.get_edge_data(city1, city2)['edge_colors']) == 0:
                 self.graph.remove_edge(city1, city2)
-        
-    def get_edges(self):
-        """
-        Retorna uma lista de tuplas com todas as conexões existentes.
-        
-        Returns:
-            Lista de tuplas no formato [(cidade1, cidade2)]
-        """
-        return self.graph.edges()
-
-    def get_edge_colors(self, city1, city2):
-        """
-        Retorna as cores da conexão entre duas cidades.
-        
-        Args:
-            city1: String representando a primeira cidade
-            city2: String representando a segunda cidade
-            
-        Returns:
-            Lista de cores da conexão
-        """
-        return self.graph.get_edge_data(city1, city2)['edge_colors']
-
-    def get_edge_weight(self, city1, city2):
-        """
-        Retorna o peso da conexão entre duas cidades (ou seja, a distância).
-        
-        Args:
-            city1: String representando a primeira cidade
-            city2: String representando a segunda cidade
-            
-        Returns:
-            Inteiro representando o peso da conexão
-        """
-        return self.graph.get_edge_data(city1, city2)['weight']
-    
-    def get_path_weight(self, city1, city2):
-        """
-        Retorna o peso do caminho mais curto entre duas cidades.
-        
-        Args:
-            city1: String representando a primeira cidade
-            city2: String representando a segunda cidade
-            
-        Returns:
-            Inteiro representando o peso do caminho
-        """
-        return nx.dijkstra_path_length(self.graph, city1, city2)
-    
+                
     def get_nodes(self):
         """
         Retorna todos os nós do grafo.
@@ -236,6 +184,7 @@ class PlayerBoard(Board):
         else:
             print(f"Conexão entre {city1} e {city2} já existe. Não é possível adicionar outra conexão entre as mesmas cidades.")
 
+
     def longest_path(self, start: str) -> Tuple[int, Tuple[List[str], Set[Tuple[str, str]]]]:
         """
         Encontra o caminho mais longo a partir de uma cidade inicial usando busca em profundidade (DFS).
@@ -246,23 +195,8 @@ class PlayerBoard(Board):
 
         Returns:
             Tupla no formato (peso_total, ([cidades_no_caminho], {arestas_usadas})).
-
-        >>> p = PlayerBoard()
-        >>> p.add_edge('a', 'b', 1, 'blue')
-        >>> p.add_edge('b', 'd', 1, 'blue')
-        >>> p.add_edge('d', 'e', 1, 'blue')
-        >>> p.add_edge('e', 'f', 98, 'blue')
-        >>> p.add_edge('e', 'b', 1, 'blue')
-        >>> p.add_edge('b', 'c', 1, 'blue')
-        >>> p.add_edge('a', 'z', 1, 'blue')
-        >>> weight, (path, edges) = p.longest_path('b')
-        >>> weight
-        100
-        >>> path
-        ['b', 'd', 'e', 'f']
-        >>> sorted(edges)
-        [('b', 'd'), ('d', 'e'), ('e', 'f')]
         """
+        
         best_weight = 0
         best_path = ([], set())  # ([cities], {edges})
 

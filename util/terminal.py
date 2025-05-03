@@ -30,25 +30,47 @@ def print_section(title):
     """
     print("\n" + Fore.CYAN + "=" * 20 + f" {title} " + "=" * 20 + Style.RESET_ALL + "\n")
 
+
 def print_sep_line(group=None):
     """
     Imprime uma linha separadora com formatação para diferentes tipos de dados.
+    Versão específica para o jogo Ticket to Ride que trata rotas corretamente.
     
     Args:
         group: O grupo de dados a ser impresso (dicionário, lista, etc.)
     """
-    print("")
+    print(Fore.YELLOW + "__________________________________________" + Style.RESET_ALL)
+    
+    # Se for None
+    if group is None:
+        print(Fore.YELLOW + "__________________________________________" + Style.RESET_ALL)
+        return
+        
+    # Para dicionários e contadores (como a mão do jogador)
     if isinstance(group, dict) or isinstance(group, collections.Counter):
-        for i in group:
-            print(f"{Fore.CYAN}{i}\t{Fore.WHITE}{group[i]}{Style.RESET_ALL}")
-        print(Fore.YELLOW + "__________________________________________" + Style.RESET_ALL)
-    elif isinstance(group, list) or isinstance(group, set):
-        for i in group:
-            print(Fore.CYAN + str(i) + Style.RESET_ALL)
-        print(Fore.YELLOW + "__________________________________________" + Style.RESET_ALL) 
+        max_key_length = max(len(str(key)) for key in group) if group else 0
+        for key, value in group.items():
+            print(f"{Fore.CYAN}{str(key).ljust(max_key_length)}\t{Fore.WHITE}{value}{Style.RESET_ALL}")
+    
+    # Para listas de rotas (como legal_routes)
+    elif isinstance(group, list) and all(isinstance(item, tuple) and len(item) >= 3 for item in group):
+        for route in group:
+            city1, city2, details = route[0], route[1], route[2]
+            weight = details.get('weight', '?')
+            colors = ', '.join(details.get('edge_colors', ['?']))
+            print(f"{Fore.CYAN}{city1} → {city2}{Fore.WHITE} (Distância: {weight}, Cores: {colors}){Style.RESET_ALL}")
+    
+    # Para listas simples (como nomes de cidades)
+    elif isinstance(group, list) or isinstance(group, set) or isinstance(group, tuple):
+        for item in group:
+            if isinstance(item, tuple) and len(item) == 2:
+                # Tupla simples de duas cidades
+                print(f"{Fore.CYAN}{item[0]} → {item[1]}{Style.RESET_ALL}")
+            else:
+                print(f"{Fore.CYAN}{str(item)}{Style.RESET_ALL}")
+    
+    # Para valores simples (como números)
     else:
-        if group is None:
-            print(Fore.YELLOW + "__________________________________________" + Style.RESET_ALL)
-            return
-        print(Fore.CYAN + str(group) + Style.RESET_ALL)
-        print(Fore.YELLOW + "__________________________________________" + Style.RESET_ALL)
+        print(f"{Fore.CYAN}{str(group)}{Style.RESET_ALL}")
+        
+    print(Fore.YELLOW + "__________________________________________" + Style.RESET_ALL)

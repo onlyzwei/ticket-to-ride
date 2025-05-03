@@ -23,11 +23,7 @@ class Game(object):
         self.players = []
         self.pos_to_move = 0
         self.route_values = {1: 1, 2: 2, 3: 4, 4: 7, 5: 10, 6: 15}
-<<<<<<< HEAD
-        self.ticket_handler = Ticket(self.deck)  # Instância do gerenciador de tickets
-=======
         self.ticket_handler = Ticket()  # Instância independente do gerenciador de tickets
->>>>>>> pierre
         self.train_handler = Train(self.board, self.route_values)  # Instância do gerenciador de trens
         
         for position in range(num_players):
@@ -126,51 +122,24 @@ class Game(object):
         elif choice == 'trains':
             self.train_handler.place_trains(player, self.deck)
         else:
-<<<<<<< HEAD
-            self.ticket_handler.pick_tickets(player)  # Usando o Ticket
-    
-    def _pick_cards(self, player):
-        count = 0
-        
-        # Mostrar as cartas na mão do jogador
-=======
             self.ticket_handler.pick_tickets(player) 
     
     # Mostrar as cartas na mão do jogador
     def show_player_cards(self, player):
->>>>>>> pierre
         print(f"{Fore.YELLOW}Sua mão consiste em: {Style.RESET_ALL}")
         hand = player.get_hand()
         if hand:
             print_sep_line(hand)
         else:
             print(f"{Fore.WHITE}Sua mão está vazia{Style.RESET_ALL}")
-<<<<<<< HEAD
-            
-        # Mostrar a pilha de compra (cartas viradas para cima)
-        print(f"{Fore.YELLOW}A pilha de compra consiste em: {Style.RESET_ALL}")
-=======
     
     # Mostrar a pilha de compra (cartas viradas para cima)
     def show_pile_cards(self, player):
         print(f"{Fore.YELLOW}As cartas visíveis consistem em: {Style.RESET_ALL}")
->>>>>>> pierre
         draw_pile = self.deck.get_draw_pile()
         if draw_pile:
             print_sep_line(draw_pile)
         else:
-<<<<<<< HEAD
-            print(f"{Fore.WHITE}A pilha de compra está vazia{Style.RESET_ALL}")
-            
-        # Primeira escolha de carta
-        choice1 = input(f"{Fore.CYAN}Por favor digite uma carta da lista acima ou "
-                        + f"digite '{Fore.WHITE}drawPile{Fore.CYAN}' para comprar do monte: {Style.RESET_ALL}")
-                                                
-        while choice1 not in draw_pile + ['drawPile'] and count < 5:
-            choice1 = input(f"{Fore.RED}Resposta inválida. Por favor digite uma carta de " 
-                            + f"{Fore.WHITE}{str(draw_pile)}{Fore.RED} "
-                            + f"ou digite '{Fore.WHITE}drawPile{Fore.RED}' para comprar do monte: {Style.RESET_ALL}")
-=======
             print(f"{Fore.WHITE}Não há cartas visíveis{Style.RESET_ALL}")
 
     def _pick_cards(self, player):
@@ -186,18 +155,13 @@ class Game(object):
             choice1 = input(f"{Fore.RED}Resposta inválida. Por favor digite uma carta de " 
                             + f"{Fore.WHITE}{str(draw_pile)}{Fore.RED} "
                             + f"ou digite '{Fore.WHITE}comprar{Fore.RED}' para comprar do monte: {Style.RESET_ALL}")
->>>>>>> pierre
             count += 1
             
         if count >= 5:
             return "Movimento cancelado"
             
         # Processar a escolha da primeira carta
-<<<<<<< HEAD
-        if choice1 == 'drawPile':
-=======
         if choice1 == 'comprar':
->>>>>>> pierre
             chosen_card = self.deck.pick_face_down()
             print(f"{Fore.GREEN}Você comprou do monte: {Fore.WHITE}{chosen_card}{Style.RESET_ALL}")
             player.add_card_to_hand(chosen_card)
@@ -206,40 +170,19 @@ class Game(object):
             print(f"{Fore.GREEN}Você selecionou: {Fore.WHITE}{choice1}{Style.RESET_ALL}")
             player.add_card_to_hand(chosen_card)
             
-<<<<<<< HEAD
-        # Se escolheu um curinga (wild), termina o turno
-        if choice1 == 'wild':
-=======
         # Se escolheu um coringa (coringa), termina o turno
         if choice1 == 'coringa':
->>>>>>> pierre
             print(f"{Fore.YELLOW}Sua mão agora consiste em: {Style.RESET_ALL}")
             print_sep_line(player.get_hand()) 
             return "Movimento concluído"
             
         # Segunda escolha de carta (atualiza a pilha de compra primeiro)
         count = 0
-<<<<<<< HEAD
-        print(f"{Fore.YELLOW}A pilha de compra atualizada: {Style.RESET_ALL}")
-=======
         print(f"{Fore.YELLOW}Cartas visíveis atualizadas: {Style.RESET_ALL}")
->>>>>>> pierre
         draw_pile = self.deck.get_draw_pile()  # Pega a pilha atualizada
         if draw_pile:
             print_sep_line(draw_pile)
         else:
-<<<<<<< HEAD
-            print(f"{Fore.WHITE}A pilha de compra está vazia{Style.RESET_ALL}")
-            
-        choice2 = input(f"{Fore.CYAN}Por favor digite outra carta da lista acima ou "
-                        + f"digite '{Fore.WHITE}drawPile{Fore.CYAN}' para comprar do monte: {Style.RESET_ALL}")
-                        
-        while (choice2 == 'wild' or choice2 not in draw_pile + ['drawPile']) and count < 5:
-            choice2 = input(f"{Fore.RED}Resposta inválida. Por favor digite uma carta de " 
-                            + f"{Fore.WHITE}{str(draw_pile)}{Fore.RED} "
-                            + f"ou digite '{Fore.WHITE}drawPile{Fore.RED}' \n"
-                            + f"NOTA: a segunda escolha não pode ser 'wild': {Style.RESET_ALL}")
-=======
             print(f"{Fore.WHITE}Não há cartas visíveis{Style.RESET_ALL}")
             
         choice2 = input(f"{Fore.CYAN}Por favor digite outra carta da lista acima ou "
@@ -250,18 +193,13 @@ class Game(object):
                             + f"{Fore.WHITE}{str(draw_pile)}{Fore.RED} "
                             + f"ou digite '{Fore.WHITE}comprar{Fore.RED}' \n"
                             + f"NOTA: a segunda escolha não pode ser 'coringa': {Style.RESET_ALL}")
->>>>>>> pierre
             count += 1
             
         if count >= 5:
             return "Movimento cancelado"
             
         # Processar a escolha da segunda carta
-<<<<<<< HEAD
-        if choice2 == 'drawPile':
-=======
         if choice2 == 'comprar':
->>>>>>> pierre
             chosen_card = self.deck.pick_face_down()
             print(f"{Fore.GREEN}Você comprou do monte: {Fore.WHITE}{chosen_card}{Style.RESET_ALL}")
             player.add_card_to_hand(chosen_card)

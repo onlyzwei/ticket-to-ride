@@ -34,4 +34,4 @@ def play_turn(player, game):
             print(Fore.RED + "Escolha inválida. Tente novamente." + Style.RESET_ALL)
     
     print(Fore.GREEN + "Turno concluído!" + Style.RESET_ALL)
-    sleep(2)
+    sleep(5)

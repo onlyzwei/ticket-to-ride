@@ -86,8 +86,13 @@ class Board:
         colors = self.get_edge_colors(city1, city2)
 
         # se a conexão é cinza, aceita qualquer cor, se não, aceita apenas a cor especificada
+<<<<<<< HEAD
         if "grey" in colors:
             self.graph.get_edge_data(city1, city2)['edge_colors'].remove("grey")
+=======
+        if "cinza" in colors:
+            self.graph.get_edge_data(city1, city2)['edge_colors'].remove("cinza")
+>>>>>>> pierre
         else:
             if edge_color not in colors:
                 raise ValueError(f"Não existe conexão da {city1} para {city2} com a cor {edge_color}")

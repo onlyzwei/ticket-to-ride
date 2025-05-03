@@ -14,7 +14,11 @@ class Train(object):
         available_colors = self.board.get_edge_colors(city1, city2)
 
         for color in available_colors:
+<<<<<<< HEAD
             if color == 'grey':
+=======
+            if color == 'cinza':
+>>>>>>> pierre
                 regular_cards = []
                 for card_type, count in player.hand.items():
                     if card_type != 'coringa':
@@ -57,9 +61,14 @@ class Train(object):
         
         return legal_destinations
     
+<<<<<<< HEAD
     def place_trains(self, player, deck):
         print(f"{Fore.YELLOW}Cidades disponíveis:{Style.RESET_ALL}")
 
+=======
+    def show_cities(self, player):
+        print(f"{Fore.YELLOW}Cidades disponíveis:{Style.RESET_ALL}")
+>>>>>>> pierre
         legal_routes = self._get_legal_routes(player)
 
         # Se não houver rotas legais, exibe uma mensagem de erro
@@ -69,9 +78,16 @@ class Train(object):
             return
         
         print_sep_line(legal_routes)
+<<<<<<< HEAD
 
         print(f"{Fore.YELLOW}Sua mão consiste em: {Style.RESET_ALL}")
         print_sep_line(player.get_hand())
+=======
+        print('\n')
+
+    
+    def place_trains(self, player, deck):
+>>>>>>> pierre
 
         city1 = self._input_city("origem", self.board.get_cities())
         if not city1:
@@ -80,7 +96,11 @@ class Train(object):
         legal_destinations = self._get_legal_destinations(player, city1)
         if not legal_destinations:
             print(f"{Fore.RED}Você selecionou uma cidade sem destino legal.{Style.RESET_ALL}")
+<<<<<<< HEAD
             sleep(2)
+=======
+            sleep(5)
+>>>>>>> pierre
             return
 
         print(f"{Fore.YELLOW}Cidades de destino disponíveis:{Style.RESET_ALL}")
@@ -126,7 +146,11 @@ class Train(object):
             color = input(f"{Fore.CYAN}Qual cor de trilho você gostaria de reivindicar? ({Fore.WHITE}{span_colors}{Fore.CYAN} disponíveis): {Style.RESET_ALL}")
             if color not in span_colors:
                 print(f"{Fore.RED}Cor inválida.{Style.RESET_ALL}")
+<<<<<<< HEAD
                 sleep(2)
+=======
+                sleep(5)
+>>>>>>> pierre
                 return False
 
         return self._select_cards_for_route(player, city1, city2, color, route_dist, deck)
@@ -143,12 +167,21 @@ class Train(object):
         else:
             avail_color = 0
             
+<<<<<<< HEAD
         avail_wild = player.hand['wild']
 
         # Tratamento especial para rotas cinzas
         if color == 'grey':
 
             color = input(f"{Fore.CYAN}Que cor você gostaria de jogar nesta rota cinza? (escolha uma cor, não 'wild'): {Style.RESET_ALL}")
+=======
+        avail_wild = player.hand['coringa']
+
+        # Tratamento especial para rotas cinzas
+        if color == 'cinza':
+
+            color = input(f"{Fore.CYAN}Que cor você gostaria de jogar nesta rota cinza? (escolha uma cor, não 'coringa'): {Style.RESET_ALL}")
+>>>>>>> pierre
 
             # Verificar se a cor é válida
             while color not in deck.possible_colors:
@@ -180,7 +213,11 @@ class Train(object):
                 if num_color < route_dist:
                     while True:
                         try:
+<<<<<<< HEAD
                             entrada = input(print(f"{Fore.CYAN}Quantas cartas curinga você gostaria de jogar? ({Fore.WHITE}{avail_wild}{Fore.CYAN} disponíveis): {Style.RESET_ALL}"))
+=======
+                            entrada = input(f"{Fore.CYAN}Quantas cartas coringa você gostaria de jogar? ({Fore.WHITE}{avail_wild}{Fore.CYAN} disponíveis): {Style.RESET_ALL}")
+>>>>>>> pierre
                             num_wild = int(entrada)
 
                             if num_wild < 0:
@@ -217,9 +254,15 @@ class Train(object):
         print(f"{Fore.GREEN}Você ganhou {points_earned} pontos com esta rota!{Style.RESET_ALL}")
 
         player.remove_cards_from_hand(color, num_color)
+<<<<<<< HEAD
         player.remove_cards_from_hand('wild', num_wild)
 
         deck.add_to_discard([color] * num_color + ['wild'] * num_wild)
+=======
+        player.remove_cards_from_hand('coringa', num_wild)
+
+        deck.add_to_discard([color] * num_color + ['coringa'] * num_wild)
+>>>>>>> pierre
 
         player.play_num_trains(route_dist)
         print(f"{Fore.YELLOW}Número de trens restantes para jogar: {Style.RESET_ALL}")

@@ -2,6 +2,7 @@
 
 from colorama import Fore, Style
 from util.terminal import print_sep_line
+from time import sleep
 
 class Train(object):
     def __init__(self, board, route_values):
@@ -16,12 +17,12 @@ class Train(object):
             # Para rotas cinzas, o jogador pode usar qualquer cor
             if color == 'grey':
                 # Encontra a cor com mais cartas na mão (exceto curingas)
-                regular_cards = [count for color, count in player.hand.items() if color != 'wild']
+                regular_cards = [count for color, count in player.hand.items() if color != 'coringa']
                 if not regular_cards:  # Se não tiver cartas regulares
                     continue
                     
                 best_color_count = max(regular_cards)
-                wild_cards = player.hand['wild']
+                wild_cards = player.hand['coringa']
                 
                 # Verifica se a soma das cartas é suficiente para a rota
                 if best_color_count + wild_cards >= route_length:
@@ -29,7 +30,7 @@ class Train(object):
             else:
                 # Para rotas coloridas, o jogador precisa de cartas da cor específica + curingas
                 color_cards = player.hand[color]
-                wild_cards = player.hand['wild']
+                wild_cards = player.hand['coringa']
                 
                 # Verifica se a soma das cartas é suficiente para a rota
                 if color_cards + wild_cards >= route_length:
@@ -44,46 +45,55 @@ class Train(object):
                         if self.does_player_have_cards_for_edge(player, x[0], x[1])]
         if not legal_routes:
             print(f"{Fore.RED}Não há rotas disponíveis com suas cartas atuais!{Style.RESET_ALL}")
+            sleep(2)
             return "Movimento concluído"
         print_sep_line(legal_routes)
         print(f"{Fore.YELLOW}Sua mão consiste em: {Style.RESET_ALL}")
         print_sep_line(player.get_hand())
-        city1 = input(f"{Fore.CYAN}Por favor digite a cidade de origem da rota desejada: {Style.RESET_ALL}")
+        
+        city1 = input(f"{Fore.CYAN}Por favor, digite a cidade de origem da rota desejada (ou 'voltar' para retornar): {Style.RESET_ALL}")
+        if city1.lower() == "voltar":
+            return "voltar"
         while city1 not in self.board.get_cities() and count < 5:
-            city1 = input(f"{Fore.RED}Resposta inválida. "
-                          + f"Por favor selecione da lista de cidades acima: {Style.RESET_ALL}"
-                          )
+            city1 = input(f"{Fore.RED}Resposta inválida. Por favor, selecione da lista de cidades acima (ou 'voltar' para retornar): {Style.RESET_ALL}")
+            if city1.lower() == "voltar":
+                return "voltar"
             count += 1
         if count >= 5:
             return "Movimento concluído"
+        
         legal_destinations = [x for x in self.board.graph.neighbors(city1) 
-                             if self.does_player_have_cards_for_edge(player, city1, x)]
+                            if self.does_player_have_cards_for_edge(player, city1, x)]
         if not legal_destinations:
-            print(f"{Fore.RED}Você selecionou uma cidade sem destino legal{Style.RESET_ALL}")
+            print(f"{Fore.RED}Você selecionou uma cidade sem destino legal.{Style.RESET_ALL}")
+            sleep(2)
             return "Movimento concluído"
-        count = 0
+        
         print(f"{Fore.YELLOW}Cidades de destino disponíveis:{Style.RESET_ALL}")
         print_sep_line(legal_destinations)
-        city2 = input(f"{Fore.CYAN}Por favor digite a cidade de destino a partir de " 
-                      + f"{Fore.WHITE}{city1}{Fore.CYAN}: {Style.RESET_ALL}"
-                      )
+        city2 = input(f"{Fore.CYAN}Por favor, digite a cidade de destino a partir de {Fore.WHITE}{city1}{Fore.CYAN} (ou 'voltar' para retornar): {Style.RESET_ALL}")
+        if city2.lower() == "voltar":
+            return "voltar"
         while not self.board.has_edge(city1, city2) and count < 5:
-            city2 = input(f"{Fore.RED}Resposta inválida. "
-                          + f"Por favor digite uma das seguintes cidades "
-                          + f"(sem aspas): \n{Fore.WHITE}" 
-                          + f"{legal_destinations}{Fore.RED}: {Style.RESET_ALL}"
-                          )
-            count += 1    
+            city2 = input(f"{Fore.RED}Resposta inválida. Por favor, digite uma das cidades disponíveis (ou 'voltar' para retornar): {Style.RESET_ALL}")
+            if city2.lower() == "voltar":
+                return "voltar"
+            count += 1
         if count >= 5:
             return "Movimento concluído"
         
-        return self._process_route_selection(player, city1, city2, deck)
+        result = self._process_route_selection(player, city1, city2, deck)
+        if result == "Movimento concluído":
+            print(f"{Fore.GREEN}Você colocou trens com sucesso na rota {city1} -> {city2}.{Style.RESET_ALL}")
+            sleep(2)
+        return result
     
     def _process_route_selection(self, player, city1, city2, deck):
         route_dist = self.board.get_edge_weight(city1, city2)
         span_colors = self.board.get_edge_colors(city1, city2)
         if len(span_colors) == 0:
-            print(f"{Fore.RED}Você selecionou duas cidades sem rota legal{Style.RESET_ALL}")
+            print(f"{Fore.RED}Você selecionou duas cidades sem rota legal.{Style.RESET_ALL}")
+            sleep(2)  # Adiciona um temporizador de 2 segundos
             return "Movimento concluído"
         print(f"\n{Fore.YELLOW}Esta rota tem comprimento: {Style.RESET_ALL}")
         print_sep_line(route_dist)
@@ -99,7 +109,8 @@ class Train(object):
                           + f"{span_colors}{Fore.CYAN} disponíveis): {Style.RESET_ALL}"
                           )
             if color not in span_colors:
-                print(f"{Fore.RED}Cor Inválida{Style.RESET_ALL}")
+                print(f"{Fore.RED}Cor inválida.{Style.RESET_ALL}")
+                sleep(2)  # Adiciona um temporizador de 2 segundos
                 return "Movimento concluído"
         
         return self._select_cards_for_route(player, city1, city2, color, route_dist, deck)

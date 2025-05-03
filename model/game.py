@@ -145,13 +145,17 @@ class Game(object):
             
         # Primeira escolha de carta
         choice1 = input(f"{Fore.CYAN}Por favor digite uma carta da lista acima ou "
-                        + f"digite '{Fore.WHITE}drawPile{Fore.CYAN}' para comprar do monte: {Style.RESET_ALL}")
+                        + f"digite '{Fore.WHITE}drawPile{Fore.CYAN}' para comprar do monte (ou 'voltar' para retornar): {Style.RESET_ALL}")
+                        
+        if choice1.lower() == "voltar":
+            return "voltar"
                         
         while choice1 not in draw_pile + ['drawPile'] and count < 5:
             choice1 = input(f"{Fore.RED}Resposta inválida. Por favor digite uma carta de " 
                             + f"{Fore.WHITE}{str(draw_pile)}{Fore.RED} "
-                            + f"ou digite '{Fore.WHITE}drawPile{Fore.RED}' para comprar do monte: {Style.RESET_ALL}"
-                            )
+                            + f"ou digite '{Fore.WHITE}drawPile{Fore.RED}' para comprar do monte (ou 'voltar' para retornar): {Style.RESET_ALL}")
+            if choice1.lower() == "voltar":
+                return "voltar"
             count += 1
             
         if count >= 5:
@@ -183,14 +187,18 @@ class Game(object):
             print(f"{Fore.WHITE}A pilha de compra está vazia{Style.RESET_ALL}")
             
         choice2 = input(f"{Fore.CYAN}Por favor digite outra carta da lista acima ou "
-                        + f"digite '{Fore.WHITE}drawPile{Fore.CYAN}' para comprar do monte: {Style.RESET_ALL}")
+                        + f"digite '{Fore.WHITE}drawPile{Fore.CYAN}' para comprar do monte (ou 'voltar' para retornar): {Style.RESET_ALL}")
+                        
+        if choice2.lower() == "voltar":
+            return "voltar"
                         
         while (choice2 == 'wild' or choice2 not in draw_pile + ['drawPile']) and count < 5:
             choice2 = input(f"{Fore.RED}Resposta inválida. Por favor digite uma carta de " 
                             + f"{Fore.WHITE}{str(draw_pile)}{Fore.RED} "
                             + f"ou digite '{Fore.WHITE}drawPile{Fore.RED}' \n"
-                            + f"NOTA: a segunda escolha não pode ser 'wild': {Style.RESET_ALL}"
-                            )
+                            + f"NOTA: a segunda escolha não pode ser 'wild' (ou 'voltar' para retornar): {Style.RESET_ALL}")
+            if choice2.lower() == "voltar":
+                return "voltar"
             count += 1
             
         if count >= 5:
@@ -209,5 +217,5 @@ class Game(object):
         # Mostrar a mão atualizada
         print(f"{Fore.YELLOW}Sua mão agora consiste em: {Style.RESET_ALL}")
         print_sep_line(player.get_hand())
-          
+        
         return "Movimento concluído"

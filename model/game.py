@@ -23,7 +23,7 @@ class Game(object):
         self.players = []
         self.pos_to_move = 0
         self.route_values = {1: 1, 2: 2, 3: 4, 4: 7, 5: 10, 6: 15}
-        self.ticket_handler = Ticket(self.deck)  # Instância do gerenciador de tickets
+        self.ticket_handler = Ticket()  # Instância independente do gerenciador de tickets
         self.train_handler = Train(self.board, self.route_values)  # Instância do gerenciador de trens
         
         for position in range(num_players):
@@ -122,7 +122,7 @@ class Game(object):
         elif choice == 'trains':
             self.train_handler.place_trains(player, self.deck)
         else:
-            self.ticket_handler.pick_tickets(player)  # Usando o Ticket
+            self.ticket_handler.pick_tickets(player) 
     
     # Mostrar as cartas na mão do jogador
     def show_player_cards(self, player):

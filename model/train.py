@@ -80,7 +80,7 @@ class Train(object):
         legal_destinations = self._get_legal_destinations(player, city1)
         if not legal_destinations:
             print(f"{Fore.RED}Você selecionou uma cidade sem destino legal.{Style.RESET_ALL}")
-            sleep(2)
+            sleep(5)
             return
 
         print(f"{Fore.YELLOW}Cidades de destino disponíveis:{Style.RESET_ALL}")
@@ -126,7 +126,7 @@ class Train(object):
             color = input(f"{Fore.CYAN}Qual cor de trilho você gostaria de reivindicar? ({Fore.WHITE}{span_colors}{Fore.CYAN} disponíveis): {Style.RESET_ALL}")
             if color not in span_colors:
                 print(f"{Fore.RED}Cor inválida.{Style.RESET_ALL}")
-                sleep(2)
+                sleep(5)
                 return False
 
         return self._select_cards_for_route(player, city1, city2, color, route_dist, deck)
@@ -180,7 +180,7 @@ class Train(object):
                 if num_color < route_dist:
                     while True:
                         try:
-                            entrada = input(print(f"{Fore.CYAN}Quantas cartas coringa você gostaria de jogar? ({Fore.WHITE}{avail_wild}{Fore.CYAN} disponíveis): {Style.RESET_ALL}"))
+                            entrada = input(f"{Fore.CYAN}Quantas cartas coringa você gostaria de jogar? ({Fore.WHITE}{avail_wild}{Fore.CYAN} disponíveis): {Style.RESET_ALL}")
                             num_wild = int(entrada)
 
                             if num_wild < 0:

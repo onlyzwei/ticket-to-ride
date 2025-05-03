@@ -1,0 +1,6 @@
+Vancouver,Seattle,21
+Helena,Portland,8
+Los Angeles,Seattle,8
+Portland,Vancouver,6
+Calgary,Seattle,17
+Los Angeles,Vancouver,20

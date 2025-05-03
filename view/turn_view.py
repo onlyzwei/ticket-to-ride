@@ -8,20 +8,18 @@ def play_turn(player, game):
 
     # Mostrar todas as informações antes de fazer uma ação
     game.show_player_cards(player)
-    print('\n')
     game.show_pile_cards(player)
-    print('\n')
     game.train_handler.show_cities(player)
-    print('\n')
     
     while True:
         choice = input(
-        Fore.YELLOW + "Digite" + Fore.CYAN + ": \n " +
-        Fore.YELLOW + "cartas -"+ Fore.CYAN + " Comprar cartas de vagão \n " +
-        Fore.YELLOW + "trens -" + Fore.CYAN + " Conquistar um caminho ou rota\n " +
-        Fore.YELLOW + "tickets -" + Fore.CYAN + " Comprar um bilhete de destino\n \n " +
-        Style.RESET_ALL
-)
+            Fore.YELLOW + "Digite uma das opções abaixo:\n\n" +
+            Fore.YELLOW + "  cartas  " + Fore.CYAN + "- Comprar cartas de vagão\n" +
+            Fore.YELLOW + "  trens   " + Fore.CYAN + "- Conquistar um caminho ou rota\n" +
+            Fore.YELLOW + "  tickets " + Fore.CYAN + "- Comprar um bilhete de destino\n\n" +
+            Fore.YELLOW + "Escolha: " + Fore.CYAN +
+            Style.RESET_ALL
+        ).lower()
         
         if choice == 'cartas':
             result = game._pick_cards(player)

@@ -1,0 +1,77 @@
+Vancouver,Seattle,1,cinza,cinza
+Vancouver,Calgary,3,cinza
+Calgary,Seattle,4,cinza
+Calgary,Winnipeg,6,branco
+Calgary,Helena,4,cinza
+Helena,Seattle,6,amarelo
+Portland,Seattle,1,cinza,cinza
+Portland,San Francisco,5,verde,roxo
+Portland,Salt Lake City,6,azul
+Salt Lake City,San Francisco,5,laranja,branco
+Los Angeles,San Francisco,3,amarelo,roxo
+Los Angeles,Las Vegas,2,cinza
+Los Angeles,Phoenix,3,cinza
+Las Vegas,Salt Lake City,3,laranja
+Salt Lake City,Helena,3,roxo
+Helena,Winnipeg,4,azul
+Helena,Denver,4,verde
+Salt Lake City,Denver,3,vermelho,amarelo
+Phoenix,Santa Fe,3,cinza
+Los Angeles,El Paso,6,preto
+Phoenix,El Paso,3,cinza
+El Paso,Santa Fe,2,cinza
+Santa Fe,Denver,2,cinza
+Helena,Duluth,6,laranja
+Helena,Omaha,5,vermelho
+Winnipeg,Duluth,4,preto
+Winnipeg,Sault St Marie,6,cinza
+Denver,Omaha,4,roxo
+Denver,Kansas City,4,preto,laranja
+Denver,Oklahoma City,4,vermelho
+Santa Fe,Oklahoma City,3,azul
+El Paso,Oklahoma City,5,amarelo
+El Paso,Dallas,4,vermelho
+El Paso,Houston,6,verde
+Houston,Dallas,1,cinza,cinza
+Dallas,Oklahoma City,2,cinza,cinza
+Oklahoma City,Kansas City,2,cinza,cinza
+Omaha,Kansas City,1,cinza,cinza
+Omaha,Duluth,2,cinza,cinza
+Duluth,Sault St Marie,3,cinza
+Duluth,Toronto,6,roxo
+Duluth,Chicago,3,vermelho
+Omaha,Chicago,4,azul
+Dallas,Little Rock,2,cinza
+Oklahoma City,Little Rock,2,cinza
+Houston,New Orleans,2,cinza
+New Orleans,Little Rock,3,verde
+Little Rock,Saint Louis,2,cinza
+Kansas City,Saint Louis,2,azul,roxo
+Little Rock,Nashville,3,branco
+Nashville,Saint Louis,2,cinza
+Saint Louis,Chicago,2,verde,branco
+Sault St Marie,Toronto,2,cinza
+Sault St Marie,Montreal,5,preto
+Montreal,Toronto,3,cinza
+Montreal,Boston,2,cinza,cinza
+Montreal,New York,3,azul
+Toronto,Pittsburgh,2,cinza
+Toronto,Chicago,4,branco
+Boston,New York,2,amarelo,vermelho
+New York,Pittsburgh,2,verde,branco
+New York,Washington,2,laranja,preto
+Pittsburgh,Chicago,3,laranja,preto
+Pittsburgh,Saint Louis,5,verde
+Pittsburgh,Nashville,4,amarelo
+Pittsburgh,Raleigh,2,cinza
+Pittsburgh,Washington,2,cinza
+Washington,Raleigh,2,cinza,cinza
+Raleigh,Nashville,3,preto
+Nashville,Atlanta,1,cinza
+Atlanta,Raleigh,2,cinza,cinza
+Raleigh,Charleston,2,cinza
+Atlanta,New Orleans,4,amarelo,laranja
+Atlanta,Charleston,2,cinza
+Miami,Charleston,4,roxo
+Miami,Atlanta,5,azul
+Miami,New Orleans,6,vermelho

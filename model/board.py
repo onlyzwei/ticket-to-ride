@@ -5,8 +5,8 @@ class Board:
     def __init__(self):
         """Inicializa o tabuleiro com as cidades e conexões a partir de arquivos."""
         self.graph = nx.Graph()
-        self.cities_file = "util/cities.txt"
-        self.edges_file = "util/edges.txt"
+        self.cities_file = "util/main_cities.txt"
+        self.edges_file = "util/main_edges.txt"
 
         self.cities = self._read_cities(self.cities_file)
         self._create_cities()

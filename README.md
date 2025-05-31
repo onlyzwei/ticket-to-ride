@@ -1,4 +1,4 @@
-# istalaçaum do bagui
+# enstalasao
 
 1. v c tem q vê si o **GO** ta funcano:  
    go version  

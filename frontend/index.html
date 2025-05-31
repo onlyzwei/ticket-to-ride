@@ -1,7 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Tiket to Ride</title>
-    </head>
+<head>
+  <meta charset="UTF-8">
+  <title>Ticket to Ride - USA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <img id="ticket-banner" src="assets/ticketbanner.jpg" alt="Ticket to Ride Banner" style="display: block; margin: 0 auto; width: 100%; border: 5px solid rgb(97, 7, 7); margin-bottom: 20px;">
+  <button id="create-game" style="background:none;border:none;padding:0;cursor:pointer;">
+    <img id="img-create-game" src="assets/newgame.png" alt="Criar nova partida">
+  </button>
+  <button id="buy-train-card" style="background:none;border:none;padding:0;cursor:pointer;">
+    <img id="img-buy-train-card" src="assets/cardBack.png" alt="Comprar carta de trem">
+  </button>
+   <button id="swap-ticket" style="background:none;border:none;padding:0;cursor:pointer;">
+    <img id="img-swap-ticket" src="assets/ticketDeck.png" alt="Trocar Ticket de Destino">
+  </button>
+  <div id="bot-message"></div>
+  <div id="game-info"></div>
+ <div id="map-container" style="position: relative;">
+  <img id="map-img" src="assets/USA_map.jpg" alt="Mapa USA" style="width: 1024px; height: 683px;">
+  <canvas id="map-canvas" width="1024" height="683" style="position: absolute; left: 0; top: 0;"></canvas>
+</div>
+
+  <script type="module" src="cidades.js"></script>
+    <script type="module" src="main.js"></script>
+</body>
 </html>

@@ -9,8 +9,13 @@ body {
   background-position: center center;
 }
 
+#main-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
 #map-container {
-  position: relative;
   width: 1024px;
   height: 683px;
   margin-top: 20px;
@@ -29,11 +34,16 @@ body {
 }
 
 #game-info {
-  margin-top: 20px;
+  width: 300px;
+  margin-left: 20px;
   background: #fff;
   padding: 10px;
   border-radius: 8px;
-  min-height: 60px;
+  min-height: 660px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-image: url('assets/infobackground.jpeg');
+  background-size: cover;
+  background-position: center;
 }
 
 #buy-train-card,
@@ -52,12 +62,10 @@ body {
 #img-create-game {
   width: 129px;
   height: 81px;
-  /* Seu rotate aqui, se quiser */
   display: block;
   transition: filter 0.1s, transform 0.1s;
 }
 
-/* Efeito de clique para todos os botões de imagem */
 #buy-train-card:active img,
 #swap-ticket:active img,
 #create-game:active img {

@@ -17,11 +17,15 @@
     <img id="img-swap-ticket" src="assets/ticketDeck.png" alt="Trocar Ticket de Destino">
   </button>
   <div id="bot-message"></div>
-  <div id="game-info"></div>
- <div id="map-container" style="position: relative;">
-  <img id="map-img" src="assets/USA_map.jpg" alt="Mapa USA" style="width: 1024px; height: 683px;">
-  <canvas id="map-canvas" width="1024" height="683" style="position: absolute; left: 0; top: 0;"></canvas>
-</div>
+  <div id="main-container">
+    <div id="map-container" style="position: relative;">
+      <img id="map-img" src="assets/USA_map.jpg" alt="Mapa USA" style="width: 1024px; height: 683px;">
+      <canvas id="map-canvas" width="1024" height="683" style="position: absolute; left: 0; top: 0;"></canvas>
+    </div>
+    <div id="game-info" style="margin-top: 20px; border: 5px solid rgb(97, 7, 7);"></div>
+      <!-- informações -->
+    </div>
+  </div>
 
   <script type="module" src="cidades.js"></script>
     <script type="module" src="main.js"></script>

@@ -1,12 +1,32 @@
-# enstalasao
+# Como Rodar o Projeto
+1. Verifique o Go
+   - No terminal, rode:
+     
+    $ go version
+     
+   - O comando deve retornar a versão do Go instalada tipo assim:
+     
+     go version go1.xx.x .....
+     
+   Caso o Go não esteja instalado, baixe e instale-o pelo site https://go.dev/doc/install
 
-1. v c tem q vê si o **GO** ta funcano:  
-   go version  
-   - se n aparecê nada, vai no site lá e baixa
-     https://go.dev/doc/install
+   !!Você tem que mover o go para path nas variaveis de ambiente!!!!!
 
-2. roda o projeto (frnt e back iram ser rodados por aqui so implkementar futuramente...)  
-   go run main.go
+2. Executar o Projeto
+   - Comando:
+     
+     $ go run main.go
+     
+   - Isso fará o projeto iniciar, resolvendo as dependencias automaticamente
 
-3. instala dependecyas
-   go mod tidy
+    E voce deve rodar o Index.hmtl separadamente!!!! Pode ser com liveserver do vscode
+    [Link LiveServer extensão](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+    Só clicar com botão direito no index.html e gg "go live"
+
+3. CASO fique alguma dependencia ainda
+    - Rode:
+
+    $ go mod tidy
+
+4. Recomendo baixar alguma extensão para Go no vscode 
+[GO - Extensão](https://marketplace.visualstudio.com/items?itemName=golang.Go)
